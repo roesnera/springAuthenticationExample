@@ -106,8 +106,8 @@ public class JwtService {
                 .getBody();
     }
 
-    // creates a bytes array from our generated, 256 bit secret key
-    // converts that array into a Key object using an alogrithm from Keys and returns it
+    // creates a bytes array from our generated, 256-bit secret key
+    // converts that array into a Key object using an algorithm from Keys and returns it
     private Key getSigningKey() {
         byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
 
