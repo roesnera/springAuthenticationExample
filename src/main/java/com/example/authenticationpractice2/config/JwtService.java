@@ -23,7 +23,7 @@ public class JwtService {
 
     // throughout this program, you will see the term Claims
     // claims are part of a JWT that make assertions about the requesting party
-    // common claims are name, authorities, and subject
+    // common claims are authorities and subject
     // there are three types of claims
     // registered - not mandatory but recommended
         // e.g. issuer, subject, expiration
@@ -49,7 +49,7 @@ public class JwtService {
             // will contain extra claims that we want added to our token
             // allows us to pass authorities or any extra claim we want to be present in our token
             Map<String, Object> extraClaims,
-            //
+            // the user we are generating a token for
             UserDetails userDetails
     ) {
         // this will build our token

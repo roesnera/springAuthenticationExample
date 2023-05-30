@@ -22,6 +22,7 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
 
     // builds a new user and enters them into the db with the role of User
+    // if we wanted to introduce some kind of qualifications for creating a new user, we would do so here
     public AuthenticationResponse register(RegisterRequest request) {
         var user = User.builder()
                 .firstname(request.getFirstName())
@@ -30,11 +31,15 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
                 .build();
-        repository.save(user);
+        System.out.println(request.getEmail());
+        if(repository.findByEmail(request.getEmail()).isEmpty()){
+            repository.save(user);
+        }
         var jwtToken = service.generateToken(user);
         return new AuthenticationResponse(jwtToken);
     }
 
+    // authenticates the user based on request credentials against the existing user database
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         manager.authenticate(
                 new UsernamePasswordAuthenticationToken(
